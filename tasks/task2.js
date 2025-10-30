@@ -12,8 +12,9 @@ const products = [
 ];
 
 function getProductsNotInPriceRange(products) {
-  // Ваш код
+  return products.filter(product => (product.price > 500) || (product.price < 100)).map(obj => obj.name)
 }
+// фільтруємо товари поза межами діапазону 100–500 та повертаємо лише назви цих товарів
 
 console.log(getProductsNotInPriceRange(products));
 module.exports = getProductsNotInPriceRange;
