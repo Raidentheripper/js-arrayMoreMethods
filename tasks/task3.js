@@ -8,9 +8,21 @@
 // })
 "Для заокруглення числа можна до десятих використовуйте .toFixed(1)"
 
-function addSuccessPercent(olympicRepresentation) {
-  // Ваш код
+function addSuccessPercent(olympicRepresentation) {         // Оголошення функції, яка приймає масив об’єктів з даними про олімпійські команди
+    return olympicRepresentation.map(item => {               // Створюємо новий масив, проходячи по кожному елементу вихідного масиву
+        const { athletes, medals } = item;                   // Деструктуризація: дістаємо кількість спортсменів та медалей з поточного об’єкта
+        let percent;                                         // Оголошуємо змінну для збереження відсотка успіху
+
+        if (athletes === 0) {                                // Якщо кількість спортсменів дорівнює 0
+            percent = '0%';                                  // Уникаємо ділення на нуль і присвоюємо відсоток '0%'
+        } else {                                           
+            percent = ((medals / athletes) * 100).toFixed(1) + '%';  // Обчислюємо відсоток (медалі/спортсмени)*100, округлюємо до 1 знака і додаємо '%'
+        }
+
+        return { ...item, percentOfSuccess: percent };        // Повертаємо новий об’єкт: копію старого + нове поле percentOfSuccess
+    });
 }
+
 
 const olympicRepresentation = [
   { sport: 'Swimming', athletes: 20, medals: 6 },
